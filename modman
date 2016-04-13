@@ -1,0 +1,4 @@
+src/app/code/local/Copimaj/BraintreeGomage     app/code/local/Copimaj/BraintreeGomage
+src/app/etc/modules/*    app/etc/modules/
+src/app/design/frontend/base/default/layout/copimaj/*	app/design/frontend/base/default/layout/copimaj/
+src/app/design/frontend/base/default/template/copimaj/*	app/design/frontend/base/default/template/copimaj/

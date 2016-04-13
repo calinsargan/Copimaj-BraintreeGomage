@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Copimaj_BraintreeGomage>
+            <version>1.0.0</version>
+        </Copimaj_BraintreeGomage>
+    </modules>
+    <global>
+        <blocks>
+            <copimaj_braintreegomage>
+                <class>Copimaj_BraintreeGomage_Block</class>
+            </copimaj_braintreegomage>
+        </blocks>
+        <helpers>
+            <copimaj_braintreegomage>
+                <class>Copimaj_BraintreeGomage_Helper</class>
+            </copimaj_braintreegomage>
+        </helpers>
+        <models>
+            <copimaj_braintreegomage>
+                <class>Copimaj_BraintreeGomage_Model</class>
+            </copimaj_braintreegomage>
+        </models>
+        <resources>
+            <copimaj_braintreegomage_setup>
+                <setup>
+                    <module>Copimaj_BraintreeGomage</module>
+                </setup>
+            </copimaj_braintreegomage_setup>
+        </resources>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <copimaj_braintreegomage module="Copimaj_BraintreeGomage">
+                    <file>copimaj/braintree_gomage.xml</file>
+                </copimaj_braintreegomage>
+            </updates>
+        </layout>
+    </frontend>
+</config>

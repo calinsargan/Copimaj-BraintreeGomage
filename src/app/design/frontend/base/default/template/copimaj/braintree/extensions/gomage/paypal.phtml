@@ -1,0 +1,78 @@
+<?php
+/**
+* Braintree Payments Extension
+*
+* This source file is subject to the Braintree Payment System Agreement (https://www.braintreepayments.com/legal)
+*
+* DISCLAIMER
+* This file will not be supported if it is modified.
+*
+* @copyright   Copyright (c) 2015 Braintree. (https://www.braintreepayments.com/)
+*/
+?>
+<?php $helper = Mage::helper('braintree_payments'); ?>
+
+<?php $_paypalCode = Braintree_Payments_Model_Paypal::PAYMENT_METHOD_CODE; ?>
+<script type="text/javascript">
+    var nativeExtensionButton = $jj('.btn-checkout');
+    var paypalDivId = 'paypal-container';
+    var braintreePaypalUtils = new BraintreeUtils();
+    var formId = '<?php echo $this->getFormId()?>';
+    var nonceInputId = '<?php echo $helper->getNonceInputId() ?>';
+    braintreePaypalUtils.createHiddenInput({name: "payment[nonce]", id: nonceInputId}, formId);
+
+    // Function to be called on success
+    var onBraintreePayPalSuccess = function(){
+        $(nonceInputId).disabled = false;
+        nativeExtensionButton.click();
+    };
+
+    // Set up PayPal button
+    var setupBraintreePayPal = function() {
+        if ($(paypalDivId)) {
+            $(paypalDivId).remove();
+        }
+        nativeExtensionButton.before('<div id="'+ paypalDivId + '"></div>');
+        braintreePaypalUtils.setupPayPal(
+            '<?php echo $helper->getToken() ?>',
+            paypalDivId,
+            '<?php echo $helper->getOrderAmount() ?>',
+            '<?php echo $this->getCurrencyCode() ?>',
+            '<?php echo $helper->getPayPalTitle() ?>',
+            nonceInputId,
+            false,
+            false,
+            '<?php echo $this->getLocale()?>',
+            onBraintreePayPalSuccess,
+            false,
+            '<?php echo $helper->__('Please try again') ?>'
+        );
+    };
+
+    // inject event on payment switched
+    checkout.observePaymentMethodsAux = checkout.observePaymentMethods;
+    checkout.observePaymentMethods = function() {
+        checkout.observePaymentMethodsAux();
+        Event.fire(document, 'payment:switchMethod');
+    }
+
+    Event.observe(document, 'payment:switchMethod', function(e) {
+        decideBraintreePaypal();
+    })
+
+    var decideBraintreePaypal = function() {
+        if (payment.currentMethod != '<?php echo $_paypalCode?>') {
+            if ($(paypalDivId)) {
+                $(paypalDivId).remove();
+            }
+            nativeExtensionButton.show().css({display:'inherit'});;
+        } else {
+            nativeExtensionButton.hide().css("cssText", "display:none !important");
+            setupBraintreePayPal();
+        }
+    }
+
+    decideBraintreePaypal();
+
+
+</script>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Copimaj_BraintreeGomage>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends></depends>
+        </Copimaj_BraintreeGomage>
+    </modules>
+</config>

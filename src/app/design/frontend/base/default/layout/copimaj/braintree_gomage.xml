@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<layout>
+	<gomage_checkout_onepage_index>
+		<reference name="before_body_end">
+            <block type="core/template" name="braintree_noconflict_gomage_opc" template="copimaj/braintree/extensions/gomage/noconflict.phtml">
+            </block>
+            <block type="core/template" name="braintree_cc_gomage_opc" template="copimaj/braintree/extensions/gomage/creditcard.phtml">
+                <action method="setData">
+                    <key>form_id</key>
+                    <value>gcheckout-onepage-form</value>
+                </action>
+            </block>
+            <block type="braintree_payments/paypal_js" name="braintree_paypal_gomage_opc" template="copimaj/braintree/extensions/gomage/paypal.phtml">
+                <action method="setData">
+                    <key>form_id</key>
+                    <value>gcheckout-onepage-form</value>
+                </action>
+            </block>
+        </reference>
+	</gomage_checkout_onepage_index>
+</layout>
